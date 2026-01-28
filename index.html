@@ -3,40 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grand Lisboa Macau - Реферальная система</title>
+    <title>SparkPoint - Реферальная система</title>
     <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; min-height: 100vh; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
         
-        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ ШАПКИ */
-        header { text-align: center; margin-bottom: 40px; padding: 30px 20px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); position: relative; }
+        header { text-align: center; margin-bottom: 40px; padding: 30px 20px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        h1 { color: #00ff9d; font-size: 2.8rem; margin-bottom: 15px; text-shadow: 0 0 15px rgba(0, 255, 157, 0.4); letter-spacing: 1px; }
         
-        /* СТИЛЬ ДЛЯ ЛОГОТИПА */
-        .logo-img {
-            max-width: 350px;
-            height: auto;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px rgba(0, 184, 255, 0.5)); /* Неоновое свечение для картинки */
-        }
-        
-        .admin-badge { background: linear-gradient(45deg, #ffd700, #ffaa00); color: black; padding: 3px 10px; border-radius: 15px; font-size: 0.8rem; margin-top: 10px; font-weight: bold; display: inline-block; }
-
-        /* НОВЫЙ СТИЛЬ ДЛЯ ПОДЗАГОЛОВКА (ЗОЛОТОЙ НЕОН) */
+        /* ОБНОВЛЕННЫЙ СТИЛЬ: СИНИЙ НЕОН */
         .subtitle {
-            color: #ffd700;
+            color: #00b8ff; 
             font-size: 1.3rem;
             line-height: 1.5;
             max-width: 800px;
             margin: 0 auto;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.7),
-                0 0 20px rgba(255, 215, 0, 0.5),
-                0 0 40px rgba(255, 215, 0, 0.3); 
+                0 0 5px rgba(0, 184, 255, 0.6),
+                0 0 15px rgba(0, 184, 255, 0.4),
+                0 0 30px rgba(0, 184, 255, 0.2);
         }
 
         .wallet-section { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 15px; margin-bottom: 30px; border: 1px solid rgba(255, 255, 255, 0.1); }
@@ -44,7 +32,7 @@
         .connect-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 255, 157, 0.4); }
         .wallet-info { display: none; margin-top: 15px; padding: 15px; background: rgba(0, 0, 0, 0.2); border-radius: 10px; border-left: 4px solid #00ff9d; }
         .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
-        @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } .logo-img { max-width: 280px; } }
+        @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
         .panel { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); }
         .panel h2 { color: #00ff9d; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(0, 255, 157, 0.3); }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
@@ -99,6 +87,7 @@
         .loading::after { content: ''; display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.3); border-top-color: #00ff9d; border-radius: 50%; animation: spin 1s linear infinite; margin-left: 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
         footer { text-align: center; margin-top: 40px; padding: 20px; color: #8a9ba8; font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .admin-badge { background: linear-gradient(45deg, #ffd700, #ffaa00); color: black; padding: 3px 10px; border-radius: 15px; font-size: 0.8rem; margin-left: 10px; font-weight: bold; display: inline-block; }
         .admin-info-panel { text-align: center; padding: 30px; color: #8a9ba8; background: rgba(0, 0, 0, 0.3); border-radius: 10px; border: 1px solid rgba(255, 215, 0, 0.2); }
         .admin-info-panel h3 { color: #ffd700; margin-bottom: 15px; font-size: 1.5rem; }
         .admin-info-panel p { margin-bottom: 10px; line-height: 1.5; }
@@ -117,12 +106,10 @@
 <body>
     <div class="container">
         <header>
-            <img src="logo.png" alt="Grand Lisboa Macau" class="logo-img">
-            <br>
-            <span id="adminBadge" class="admin-badge" style="display:none;">АДМИНИСТРАТОР</span>
+            <h1>SparkPoint <span id="adminBadge" class="admin-badge" style="display:none;">АДМИНИСТРАТОР</span></h1>
             <div class="subtitle">Точность действий и твой путь к богатству уже предрешен.<br>Где стратегия встречается с неизбежностью.</div>
         </header>
-        
+
         <div class="wallet-section">
             <button class="connect-btn" id="connectWallet">Подключить кошелек</button>
             <div class="wallet-info" id="walletInfo">
@@ -131,12 +118,12 @@
                 <div>Статус: <span id="userStatus">Не определен</span></div>
             </div>
         </div>
-        
+
         <div class="tabs">
             <div class="tab active" data-tab="user">Личный кабинет</div>
             <div class="tab" data-tab="admin" style="display:none;">Админ панель</div>
         </div>
-        
+
         <div class="tab-content active" id="userTab">
             <div class="dashboard">
                 <div class="panel">
@@ -153,23 +140,20 @@
                         <div id="currentRefInfo" class="ref-info" style="display: none;">
                             Текущий пригласитель: <span id="currentRefAddress"></span>
                         </div>
-                        <div style="margin-top: 15px; font-size: 0.9rem; color: #8a9ba8;">
-                            Скопируйте эту ссылку и отправьте друзьям. При регистрации по вашей ссылке они автоматически станут вашими рефералами.
-                        </div>
                     </div>
                 </div>
-                
+
                 <div class="panel">
                     <h2>Мои уровни</h2>
                     <div class="levels-container" id="levelsContainer"></div>
                 </div>
             </div>
-            
+
             <div class="panel">
                 <h2>Регистрация нового участника</h2>
                 <div class="form-group">
                     <label for="referrerAddress">Адрес вашего пригласителя:</label>
-                    <input type="text" id="referrerAddress" placeholder="0x..." value="" oninput="checkReferrerExists()">
+                    <input type="text" id="referrerAddress" placeholder="0x..." oninput="checkReferrerExists()">
                     <div id="referrerStatus" style="margin-top: 5px; font-size: 0.9rem;"></div>
                 </div>
                 <div style="margin: 20px 0; padding: 15px; background: rgba(0, 184, 255, 0.1); border-radius: 8px; color: #00b8ff;">
@@ -179,7 +163,7 @@
                 <div class="message" id="registerMessage"></div>
             </div>
         </div>
-        
+
         <div class="tab-content" id="adminTab">
             <div class="panel admin-panel">
                 <h2>Панель администратора</h2>
@@ -198,202 +182,85 @@
                     <button class="admin-btn btn-primary" id="withdrawBtn">Вывести комиссии на кошелек</button>
                     <div class="message" id="withdrawMessage"></div>
                 </div>
-                <div class="search-section">
-                    <h3>Поиск участника</h3>
-                    <div class="form-group">
-                        <label for="searchAddress">Адрес участника:</label>
-                        <input type="text" id="searchAddress" placeholder="0x...">
-                        <button class="admin-btn" id="searchBtn" style="margin-top: 10px;">Найти участника</button>
-                    </div>
-                    <div class="search-results" id="searchResults">
-                        <h3>Результаты поиска</h3>
-                        <div class="user-details" id="userDetails"></div>
-                    </div>
-                </div>
             </div>
         </div>
-        
-        <div class="message" id="globalMessage"></div>
-        
+
         <footer>
-            Контракт: <span id="contractAddressLink" style="color: #00b8ff;">[ВАШ АДРЕС КОНТРАКТА]</span> | Grand Lisboa Macau | Для работы требуется MetaMask
+            Контракт: <span id="contractAddressLink" style="color: #00b8ff;">...</span> | SparkPoint v1.0
         </footer>
     </div>
 
     <script>
-        // Код скриптов остается без изменений, как в вашем оригинале
         const CONTRACT_ADDRESS = '0x8703D4e87CB01aEfCBe9ad39b0eEd257ce6b5684';
         const CONTRACT_ABI = [{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"address","name":"_referrer","type":"address"}],"name":"adminAddUser","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_referrer","type":"address"}],"name":"register","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"_newAdmin","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"withdrawAdminFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ENTRY_PRICE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"thresholds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"users","outputs":[{"internalType":"uint256","name":"level","type":"uint256"},{"internalType":"address","name":"referrer","type":"address"},{"internalType":"uint256","name":"internalBalance","type":"uint256"},{"internalType":"uint256","name":"referralsInLevel","type":"uint256"},{"internalType":"uint256","name":"totalDirectReferrals","type":"uint256"},{"internalType":"uint256","name":"registrationTime","type":"uint256"},{"internalType":"bool","name":"exists","type":"bool"}],"stateMutability":"view","type":"function"}];
-        
         const LEVEL_THRESHOLDS = [0, 2, 6, 14, 30, 62, 2, 6, 14, 30, 62];
-        
+
         let web3;
         let contract;
         let userAccount;
         let isAdmin = false;
-        let currentReferrer = null;
-        
+
+        // DOM
         const connectWalletBtn = document.getElementById('connectWallet');
-        const walletInfo = document.getElementById('walletInfo');
         const walletAddress = document.getElementById('walletAddress');
         const walletBalance = document.getElementById('walletBalance');
         const userStatus = document.getElementById('userStatus');
-        const adminBadge = document.getElementById('adminBadge');
-        const userStats = document.getElementById('userStats');
-        const levelsContainer = document.getElementById('levelsContainer');
-        const referralLink = document.getElementById('referralLink');
         const referrerAddressInput = document.getElementById('referrerAddress');
-        const referrerStatus = document.getElementById('referrerStatus');
-        const registerBtn = document.getElementById('registerBtn');
-        const registerMessage = document.getElementById('registerMessage');
-        const adminStats = document.getElementById('adminStats');
-        const addUserBtn = document.getElementById('addUserBtn');
-        const addUserMessage = document.getElementById('addUserMessage');
-        const withdrawBtn = document.getElementById('withdrawBtn');
-        const withdrawMessage = document.getElementById('withdrawMessage');
-        const searchBtn = document.getElementById('searchBtn');
-        const searchResults = document.getElementById('searchResults');
-        const userDetails = document.getElementById('userDetails');
-        const globalMessage = document.getElementById('globalMessage');
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
         const currentRefInfo = document.getElementById('currentRefInfo');
         const currentRefAddress = document.getElementById('currentRefAddress');
-        const referrerCheckResult = document.getElementById('referrerCheckResult');
-        const contractAddressLink = document.getElementById('contractAddressLink');
 
         window.addEventListener('load', async () => {
-            contractAddressLink.textContent = CONTRACT_ADDRESS;
-            contractAddressLink.href = `https://bscscan.com/address/${CONTRACT_ADDRESS}`;
-            checkReferralParam();
             if (typeof window.ethereum !== 'undefined') {
-                await initWeb3();
-            } else {
-                showMessage('Для работы приложения необходимо расширение MetaMask', 'error', globalMessage);
-                connectWalletBtn.textContent = 'Установите MetaMask';
-                connectWalletBtn.disabled = true;
+                web3 = new Web3(window.ethereum);
+                contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+                checkReferralParam(); 
             }
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const tabId = tab.getAttribute('data-tab');
-                    activateTab(tabId);
-                });
-            });
+            
             connectWalletBtn.addEventListener('click', connectWallet);
-            registerBtn.addEventListener('click', registerUser);
-            addUserBtn.addEventListener('click', addUserByAdmin);
-            withdrawBtn.addEventListener('click', withdrawAdminFees);
-            searchBtn.addEventListener('click', searchUser);
-            referrerAddressInput.addEventListener('input', checkReferrerExists);
+            document.getElementById('registerBtn').addEventListener('click', registerUser);
+            document.getElementById('addUserBtn').addEventListener('click', addUserByAdmin);
+            document.getElementById('withdrawBtn').addEventListener('click', withdrawAdminFees);
+            
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => activateTab(tab.getAttribute('data-tab')));
+            });
         });
 
-        async function checkReferrerExists() {
-            const referrerAddress = referrerAddressInput.value.trim();
-            if (!referrerAddress || !web3 || !contract) {
-                referrerStatus.innerHTML = '';
-                referrerCheckResult.style.display = 'none';
-                return;
-            }
-            if (!web3.utils.isAddress(referrerAddress)) {
-                referrerStatus.innerHTML = '<span style="color: #ff416c;">Неверный формат адреса</span>';
-                referrerCheckResult.style.display = 'none';
-                return;
-            }
-            try {
-                const checksumAddress = web3.utils.toChecksumAddress(referrerAddress);
-                const referrerData = await contract.methods.users(checksumAddress).call();
-                if (referrerData.exists) {
-                    if (userAccount && checksumAddress.toLowerCase() === userAccount.toLowerCase()) {
-                        referrerStatus.innerHTML = '<span style="color: #ff416c;">Вы не можете указать себя в качестве пригласителя</span>';
-                        referrerCheckResult.style.display = 'none';
-                        return;
-                    }
-                    if (referrerData.totalDirectReferrals >= 2) {
-                        referrerStatus.innerHTML = `<span style="color: #ffaa00;">Пригласитель уже имеет 2 реферала (${referrerData.totalDirectReferrals}/2)</span>`;
-                    } else {
-                        referrerStatus.innerHTML = `<span style="color: #00ff9d;">✓ Пригласитель найден (Уровень: ${referrerData.level}, Рефералов: ${referrerData.totalDirectReferrals}/2)</span>`;
-                    }
-                    referrerCheckResult.innerHTML = `
-                        <div>Адрес пригласителя: ${shortenAddress(checksumAddress)}</div>
-                        <div>Уровень: ${referrerData.level}</div>
-                        <div>Прямые рефералы: ${referrerData.totalDirectReferrals}/2</div>
-                        <div>Внутренний баланс: ${web3.utils.fromWei(referrerData.internalBalance, 'ether').substring(0, 8)} BNB</div>
-                    `;
-                    referrerCheckResult.className = 'referrer-check referrer-valid';
-                    referrerCheckResult.style.display = 'block';
-                } else {
-                    referrerStatus.innerHTML = '<span style="color: #ff416c;">Этот адрес не зарегистрирован в системе</span>';
-                    referrerCheckResult.innerHTML = 'Этот адрес не зарегистрирован в системе. Укажите адрес существующего участника.';
-                    referrerCheckResult.className = 'referrer-check referrer-invalid';
-                    referrerCheckResult.style.display = 'block';
-                }
-            } catch (error) {
-                referrerStatus.innerHTML = '<span style="color: #ff416c;">Ошибка проверки пригласителя</span>';
-            }
-        }
-
+        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ССЫЛКИ
         function checkReferralParam() {
             const urlParams = new URLSearchParams(window.location.search);
             const refParam = urlParams.get('ref');
-            if (refParam) {
-                currentReferrer = refParam;
+            
+            if (refParam && web3.utils.isAddress(refParam)) {
+                localStorage.setItem('sparkpoint_referrer', refParam);
+                referrerAddressInput.value = refParam;
                 currentRefAddress.textContent = shortenAddress(refParam);
                 currentRefInfo.style.display = 'block';
-                referrerAddressInput.value = refParam;
-                localStorage.setItem('sparkpoint_referrer', refParam);
-                if (web3 && contract) {
-                    setTimeout(() => checkReferrerExists(), 500);
-                }
+                checkReferrerExists();
             } else {
                 const savedRef = localStorage.getItem('sparkpoint_referrer');
                 if (savedRef) {
-                    currentReferrer = savedRef;
+                    referrerAddressInput.value = savedRef;
                     currentRefAddress.textContent = shortenAddress(savedRef);
                     currentRefInfo.style.display = 'block';
-                    referrerAddressInput.value = savedRef;
-                    if (web3 && contract) {
-                        setTimeout(() => checkReferrerExists(), 500);
-                    }
+                    checkReferrerExists();
                 }
             }
         }
 
-        function copyReferralLink() {
-            if (!userAccount) {
-                showMessage('Сначала подключите кошелек', 'error', globalMessage);
-                return;
-            }
-            const currentUrl = window.location.href.split('?')[0];
-            const refLink = `${currentUrl}?ref=${userAccount}`;
-            referralLink.value = refLink;
-            copyToClipboard(refLink);
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showMessage('Ссылка скопирована!', 'success', globalMessage);
-            });
-        }
-
-        function clearReferralParam() {
-            const newUrl = window.location.href.split('?')[0];
-            window.history.replaceState({}, document.title, newUrl);
-            currentReferrer = null;
-            currentRefInfo.style.display = 'none';
-            referrerAddressInput.value = '';
-            localStorage.removeItem('sparkpoint_referrer');
-            referrerStatus.innerHTML = '';
-            referrerCheckResult.style.display = 'none';
-            showMessage('Реферальная ссылка очищена', 'info', globalMessage);
-        }
-
-        async function initWeb3() {
+        async function checkReferrerExists() {
+            const ref = referrerAddressInput.value.trim();
+            if (!web3 || !contract || !web3.utils.isAddress(ref)) return;
+            
             try {
-                web3 = new Web3(window.ethereum);
-                contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-            } catch (error) {
-                showMessage('Ошибка инициализации Web3', 'error', globalMessage);
-            }
+                const data = await contract.methods.users(ref).call();
+                const status = document.getElementById('referrerStatus');
+                if (data.exists) {
+                    status.innerHTML = '<span style="color: #00ff9d;">✓ Пригласитель активен</span>';
+                } else {
+                    status.innerHTML = '<span style="color: #ff416c;">Пригласитель не найден в системе</span>';
+                }
+            } catch (e) {}
         }
 
         async function connectWallet() {
@@ -401,106 +268,94 @@
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                 userAccount = accounts[0];
                 walletAddress.textContent = shortenAddress(userAccount);
-                connectWalletBtn.textContent = 'Подключено';
-                walletInfo.style.display = 'block';
+                document.getElementById('walletInfo').style.display = 'block';
+                
                 const balance = await web3.eth.getBalance(userAccount);
-                walletBalance.textContent = web3.utils.fromWei(balance, 'ether').substring(0, 8) + ' BNB';
+                walletBalance.textContent = web3.utils.fromWei(balance, 'ether').substring(0, 6) + ' BNB';
+                
                 await checkIfAdmin();
                 await loadUserData();
+                checkReferralParam(); // Повторная проверка после логина
             } catch (error) {
-                showMessage('Ошибка подключения', 'error', globalMessage);
+                alert("Ошибка подключения: " + error.message);
             }
         }
 
         async function checkIfAdmin() {
-            try {
-                const adminAddress = await contract.methods.admin().call();
-                isAdmin = (userAccount.toLowerCase() === adminAddress.toLowerCase());
-                if (isAdmin) {
-                    document.querySelector('.tab[data-tab="admin"]').style.display = 'block';
-                    adminBadge.style.display = 'inline';
-                    userStatus.textContent = 'Администратор';
-                    await loadAdminData();
-                }
-            } catch (error) {}
+            const adminAddr = await contract.methods.admin().call();
+            isAdmin = (userAccount.toLowerCase() === adminAddr.toLowerCase());
+            if (isAdmin) {
+                document.querySelector('.tab[data-tab="admin"]').style.display = 'block';
+                document.getElementById('adminBadge').style.display = 'inline';
+                userStatus.textContent = 'Администратор';
+            }
         }
 
         async function loadUserData() {
-            if (!userAccount) return;
-            try {
-                const userData = await contract.methods.users(userAccount).call();
-                if (!isAdmin) {
-                    updateUserStats(userData);
-                    updateUserLevels(userData);
-                }
-            } catch (error) {}
-        }
-
-        function updateUserStats(userData) {
-            if (!userData.exists) {
-                userStats.innerHTML = `<div class="stat-card"><div class="stat-label">Статус</div><div class="stat-value">Новый</div></div>`;
-                return;
+            const data = await contract.methods.users(userAccount).call();
+            if (data.exists) {
+                document.getElementById('userStats').innerHTML = `
+                    <div class="stat-card"><div class="stat-label">Уровень</div><div class="stat-value">${data.level}</div></div>
+                    <div class="stat-card"><div class="stat-label">Рефералы</div><div class="stat-value">${data.totalDirectReferrals}/2</div></div>
+                `;
+                updateUserLevels(data);
             }
-            userStats.innerHTML = `
-                <div class="stat-card"><div class="stat-label">Уровень</div><div class="stat-value">${userData.level}</div></div>
-                <div class="stat-card"><div class="stat-label">Баланс</div><div class="stat-value">${web3.utils.fromWei(userData.internalBalance, 'ether').substring(0, 6)} BNB</div></div>
-                <div class="stat-card"><div class="stat-label">Рефералы</div><div class="stat-value">${userData.totalDirectReferrals}/2</div></div>
-            `;
         }
 
         function updateUserLevels(userData) {
-            if (!userData.exists) return;
             let levelsHTML = '';
             const currentLevel = parseInt(userData.level);
             for (let level = 1; level <= 5; level++) {
-                const threshold = LEVEL_THRESHOLDS[level] || 0;
-                levelsHTML += `<div class="level-section"><div class="level-title"><div class="level-name">Уровень ${level}</div></div><div class="circles-container">...</div></div>`;
+                const threshold = LEVEL_THRESHOLDS[level];
+                levelsHTML += `<div class="level-section">
+                    <div class="level-title"><span>Уровень ${level}</span><span>Нужно: ${threshold}</span></div>
+                    <div class="circles-container">Доступно после активации</div>
+                </div>`;
             }
-            levelsContainer.innerHTML = levelsHTML;
-        }
-
-        async function loadAdminData() {
-            const balance = await web3.eth.getBalance(CONTRACT_ADDRESS);
-            adminStats.innerHTML = `<div class="admin-stat-card"><div class="admin-stat-label">Касса контракта</div><div class="admin-stat-value">${web3.utils.fromWei(balance, 'ether').substring(0, 6)} BNB</div></div>`;
+            document.getElementById('levelsContainer').innerHTML = levelsHTML;
         }
 
         async function registerUser() {
-            const ref = referrerAddressInput.value;
+            const ref = referrerAddressInput.value.trim();
+            if(!web3.utils.isAddress(ref)) return alert("Укажите верный адрес пригласителя");
+            
             const price = await contract.methods.ENTRY_PRICE().call();
             await contract.methods.register(ref).send({ from: userAccount, value: price });
+            location.reload();
         }
 
         async function addUserByAdmin() {
             const user = document.getElementById('newUserAddress').value;
             const ref = document.getElementById('newUserReferrer').value;
             await contract.methods.adminAddUser(user, ref).send({ from: userAccount });
+            alert("Пользователь добавлен на 1 уровень");
         }
 
         async function withdrawAdminFees() {
             await contract.methods.withdrawAdminFees().send({ from: userAccount });
         }
 
-        async function searchUser() {
-            const addr = document.getElementById('searchAddress').value;
-            const data = await contract.methods.users(addr).call();
-            userDetails.innerHTML = `<div>Уровень: ${data.level}</div>`;
-            searchResults.style.display = 'block';
-        }
-
         function activateTab(tabId) {
-            tabs.forEach(tab => tab.classList.toggle('active', tab.getAttribute('data-tab') === tabId));
-            tabContents.forEach(content => content.classList.toggle('active', content.id === `${tabId}Tab`));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(`${tabId}Tab`).classList.add('active');
         }
 
-        function showMessage(text, type, element) {
-            element.textContent = text;
-            element.className = `message ${type}`;
-            element.style.display = 'block';
-            setTimeout(() => { element.style.display = 'none'; }, 4000);
+        function shortenAddress(addr) {
+            return addr.substring(0, 6) + "..." + addr.substring(addr.length - 4);
         }
 
-        function shortenAddress(address) {
-            return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+        function copyReferralLink() {
+            const link = window.location.origin + window.location.pathname + "?ref=" + userAccount;
+            navigator.clipboard.writeText(link);
+            alert("Ссылка скопирована!");
+        }
+
+        function clearReferralParam() {
+            localStorage.removeItem('sparkpoint_referrer');
+            window.history.replaceState({}, '', window.location.pathname);
+            location.reload();
         }
     </script>
 </body>
